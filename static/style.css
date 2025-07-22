@@ -1,0 +1,221 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: black;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .landing {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5vh 20px;
+  }
+  
+  .brand-heading {
+    font-size: 3em;
+    font-weight: bold;
+    background: linear-gradient(to right, #ff6a00, #ee0979, #00c3ff, #29ffc6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+  }
+  
+  .subtitle {
+    font-size: 1.2em;
+    color: #ccc;
+    margin-top: 15px;
+  }
+  
+  .booking-section {
+    background: #fff;
+    color: #333;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .booking-title {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+  }
+  
+  .booking-subtitle {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+  }
+  
+  .booking-form {
+    max-width: 400px;
+    margin: auto;
+    text-align: left;
+    background: #f9f9f9;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  
+  .booking-form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  
+  .booking-form select,
+  .booking-form input[type="text"],
+  .booking-form input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .booking-form button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: #4A90E2;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .booking-form button:hover {
+    background: #357bd8;
+  }
+  
+  #chat-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #4A90E2;
+    color: white;
+    border-radius: 50%;
+    padding: 18px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 999;
+  }
+  
+  .chat-popup {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 420px;
+    height: 550px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
+  }
+  
+  .chat-header {
+    background: #4A90E2;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .chatbox {
+    flex: 1;
+    overflow-y: auto;
+    background: #f7f7f7;
+    padding: 20px 10px;
+    font-size: 14px;
+  }
+  
+  .chat-user {
+    background: #e1f5fe;
+    padding: 14px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  
+  .chat-bot {
+    background: #f0f0f0;
+    padding: 14px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  
+  .chat-bot a.link {
+    background: black;
+    color: white;
+    padding: 4px 6px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  
+  .input-row {
+    display: flex;
+    border-top: 1px solid #ccc;
+  }
+  
+  .input-row input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: none;
+  }
+  
+  .input-row button {
+    padding: 10px 16px;
+    background: #4A90E2;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .suggestion, .question {
+    background: #f0f0f0;
+    color: #0077cc;
+    border: 1px solid #0077cc;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .padded {
+    margin: 16px 0;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* 📱 Mobile View: 70% of Screen */
+  @media screen and (max-width: 600px) {
+    .chat-popup {
+      width: 70vw;
+      height: 70vh;
+      right: 10px;
+      bottom: 70px;
+    }
+  
+    #chat-icon {
+      padding: 14px;
+      font-size: 20px;
+    }
+  
+    .brand-heading {
+      font-size: 2em;
+      text-align: center;
+    }
+  
+    .input-row input[type="text"] {
+      font-size: 14px;
+    }
+  }
+  

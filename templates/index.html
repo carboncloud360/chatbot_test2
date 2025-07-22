@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Building Dreams, Crafting Excellence</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<!-- Landing Section -->
+<div class="landing">
+  <h1 class="brand-heading">Building Dreams, Crafting Excellence</h1>
+  <p class="subtitle">Trusted Construction Solutions Across Kerala, Tamil Nadu & Karnataka</p>
+</div>
+
+<!-- Booking Section -->
+<section class="booking-section" id="book-form">
+  <h2 class="booking-title">Book a Ticket</h2>
+  <p class="booking-subtitle">We will get back to you within one business day.</p>
+  <form class="booking-form" onsubmit="event.preventDefault(); alert('Form submitted!')">
+    <label for="service">Select a Service:</label>
+    <select id="service" onchange="handleDropdownChange()">
+      <option disabled selected>Choose an option</option>
+      <option>Project Consultation</option>
+      <option>Request Project Cost Estimate</option>
+      <option>Site Visit Request</option>
+      <option>Renovation/Remodeling Inquiry</option>
+      <option>Architectural/Interior Design Discussion</option>
+      <option>Not in the list</option>
+    </select>
+    <div id="custom-input" class="hidden">
+      <label for="customService">Please specify:</label>
+      <input type="text" id="customService" placeholder="Type your service request" />
+    </div>
+    <label for="mobile">Mobile Number:</label>
+    <input type="tel" id="mobile" pattern="[0-9]{10}" placeholder="10-digit mobile number" required />
+    <button type="submit">Submit</button>
+  </form>
+</section>
+
+<!-- Chatbot -->
+<div id="chat-icon" onclick="toggleChat()">💬</div>
+<div id="chat-popup" class="chat-popup hidden">
+  <div class="chat-header">
+    <span>John from XYZ Business</span>
+    <button onclick="toggleChat()">✖</button>
+  </div>
+  <div id="chatbox" class="chatbox">
+    <p class="padded"><b>Do you have any questions?</b></p>
+    <div class="initial-options padded">
+      <button class="suggestion" onclick="handleYes()">Yes</button>
+      <button class="suggestion" onclick="toggleChat()">No</button>
+    </div>
+  </div>
+  <div class="input-row">
+    <input type="text" id="userInput" placeholder="Type your question..." onkeypress="if(event.key==='Enter') sendMessage()" />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+  window.onload = () => document.getElementById('chat-popup').classList.remove('hidden');
+
+  function toggleChat() {
+    document.getElementById('chat-popup').classList.toggle('hidden');
+  }
+
+  function handleDropdownChange() {
+    const dropdown = document.getElementById("service");
+    const customInput = document.getElementById("custom-input");
+    customInput.classList.toggle("hidden", dropdown.value !== "Not in the list");
+  }
+
+  async function sendMessage(msg = null) {
+    const input = document.getElementById("userInput");
+    const chatbox = document.getElementById("chatbox");
+    let message = msg || input.value;
+    if (!message.trim()) return;
+
+    chatbox.innerHTML += `<div class="chat-user padded"><b>You:</b> ${message}</div>`;
+    input.value = "";
+
+    const res = await fetch('/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await res.json();
+    chatbox.innerHTML += `<div class="chat-bot padded">${data.reply}</div>`;
+    chatbox.innerHTML += `<div class="suggestion padded" onclick="handleYes()">Ask more questions</div>`;
+    chatbox.scrollTop = chatbox.scrollHeight;
+  }
+
+  async function handleYes() {
+    const res = await fetch('/random-questions');
+    const data = await res.json();
+    const chatbox = document.getElementById("chatbox");
+
+    chatbox.innerHTML += `<p class="padded"><b>Most Asked Questions:</b></p>`;
+    data.questions.forEach(q => {
+      chatbox.innerHTML += `<div class="question padded" onclick="sendMessage('${q}')">${q}</div>`;
+    });
+    chatbox.scrollTop = chatbox.scrollHeight;
+  }
+</script>
+
+</body>
+</html>
